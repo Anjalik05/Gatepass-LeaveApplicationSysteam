@@ -12,6 +12,8 @@
             padding: 20px;
             display: flex;
             justify-content: center; 
+            align-items: center;
+            height: 100vh; /* Centers the box vertically */
         }
         .container { 
             background: white;
@@ -19,12 +21,12 @@
             max-width: 400px; 
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        h2 { text-align: center; color: #333; }
+        h2 { text-align: center; color: #333; margin-bottom: 5px; }
         .hidden { display: none; } 
         
-        /* Input Styling */
+        /* Input & Select Styling */
         input, select { 
             width: 100%; 
             padding: 12px; 
@@ -32,6 +34,7 @@
             box-sizing: border-box; 
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 14px;
         }
         
         /* Button Styling */
@@ -40,20 +43,23 @@
             background-color: #4CAF50; 
             color: white; 
             padding: 14px 20px; 
-            margin: 8px 0; 
+            margin: 10px 0 5px 0; 
             border: none; 
             border-radius: 5px; 
             cursor: pointer; 
             font-size: 16px;
+            font-weight: bold;
         }
         button:hover { background-color: #45a049; }
-        button.secondary { background-color: #f44336; } /* Red button for logout/reject */
+        button.secondary { background-color: #f44336; margin-top: 10px; } /* Red button */
+        button.outline { background-color: #008CBA; } /* Blue button */
 
-        .status-box {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #e7f3fe;
-            border-left: 6px solid #2196F3;
+        label {
+            font-size: 14px;
+            color: #555;
+            font-weight: 600;
+            margin-top: 10px;
+            display: block;
         }
     </style>
 </head>
@@ -63,42 +69,52 @@
     
     <div id="login-section">
         <h2>College Portal Login</h2>
-        <p style="text-align:center; color:gray;">Enter your college email</p>
-        <input type="email" id="email" placeholder="student@college.edu">
-        <input type="password" id="password" placeholder="Password">
+        <p style="text-align:center; color:gray; margin-top: 0;">Sign in to continue</p>
+        
+        <label>I am a:</label>
+        <select id="roleSelect">
+            <option value="student">Student</option>
+            <option value="staff">Staff / Faculty</option>
+        </select>
+
+        <label>Email:</label>
+        <input type="email" id="email" placeholder="e.g., student@college.edu">
+        
+        <label>Password:</label>
+        <input type="password" id="password" placeholder="Enter Password">
+        
         <button id="btnLogin">Log In</button>
-        <button id="btnSignup" style="background-color: #008CBA;">Create Account</button>
+        <button id="btnSignup" class="outline">Create Account</button>
     </div>
 
     <div id="student-dashboard" class="hidden">
         <h2>Student Dashboard</h2>
-        <p id="welcome-msg" style="text-align:center;"></p>
+        <p id="welcome-msg" style="text-align:center; color: #4CAF50;"></p>
         
-        <label><b>Application Type:</b></label>
+        <label>Application Type:</label>
         <select id="app-type">
             <option value="Leave">Leave Application</option>
             <option value="Gatepass">Gatepass</option>
         </select>
 
-        <input type="text" id="dept" placeholder="Dept (Computer/AIDS/ETC)">
+        <input type="text" id="dept" placeholder="Department (Computer/AIDS/ETC)">
         <input type="text" id="rollno" placeholder="Roll No">
         <input type="text" id="reason" placeholder="Reason for Leave/Pass">
         
-        <label>From:</label>
+        <label>From Date/Time:</label>
         <input type="datetime-local" id="datetime">
 
         <button id="btnSubmit">Submit Request</button>
-        <div id="status-display"></div>
+        <div id="status-display" style="margin-top:10px;"></div>
         
-        <br>
         <button id="btnLogoutStudent" class="secondary">Logout</button>
     </div>
 
     <div id="staff-dashboard" class="hidden">
         <h2>Staff Dashboard</h2>
-        <p>Pending Requests:</p>
+        <p style="text-align:center; color:#555;">Pending Student Requests</p>
         <div id="request-list">
-            <p style="text-align:center;">Loading data...</p>
+            <p style="text-align:center; color: #999;">Loading data...</p>
         </div>
         <button id="btnLogoutStaff" class="secondary">Logout</button>
     </div>
