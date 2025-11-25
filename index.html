@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gatepass & Leave System</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center; 
+        }
+        .container { 
+            background: white;
+            width: 100%;
+            max-width: 400px; 
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h2 { text-align: center; color: #333; }
+        .hidden { display: none; } 
+        
+        /* Input Styling */
+        input, select { 
+            width: 100%; 
+            padding: 12px; 
+            margin: 8px 0; 
+            box-sizing: border-box; 
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        /* Button Styling */
+        button { 
+            width: 100%; 
+            background-color: #4CAF50; 
+            color: white; 
+            padding: 14px 20px; 
+            margin: 8px 0; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-size: 16px;
+        }
+        button:hover { background-color: #45a049; }
+        button.secondary { background-color: #f44336; } /* Red button for logout/reject */
+
+        .status-box {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div id="login-section">
+        <h2>College Portal Login</h2>
+        <p style="text-align:center; color:gray;">Enter your college email</p>
+        <input type="email" id="email" placeholder="student@college.edu">
+        <input type="password" id="password" placeholder="Password">
+        <button id="btnLogin">Log In</button>
+        <button id="btnSignup" style="background-color: #008CBA;">Create Account</button>
+    </div>
+
+    <div id="student-dashboard" class="hidden">
+        <h2>Student Dashboard</h2>
+        <p id="welcome-msg" style="text-align:center;"></p>
+        
+        <label><b>Application Type:</b></label>
+        <select id="app-type">
+            <option value="Leave">Leave Application</option>
+            <option value="Gatepass">Gatepass</option>
+        </select>
+
+        <input type="text" id="dept" placeholder="Dept (Computer/AIDS/ETC)">
+        <input type="text" id="rollno" placeholder="Roll No">
+        <input type="text" id="reason" placeholder="Reason for Leave/Pass">
+        
+        <label>From:</label>
+        <input type="datetime-local" id="datetime">
+
+        <button id="btnSubmit">Submit Request</button>
+        <div id="status-display"></div>
+        
+        <br>
+        <button id="btnLogoutStudent" class="secondary">Logout</button>
+    </div>
+
+    <div id="staff-dashboard" class="hidden">
+        <h2>Staff Dashboard</h2>
+        <p>Pending Requests:</p>
+        <div id="request-list">
+            <p style="text-align:center;">Loading data...</p>
+        </div>
+        <button id="btnLogoutStaff" class="secondary">Logout</button>
+    </div>
+
+</div>
+
+<script type="module" src="app.js"></script>
+
+</body>
+</html>
