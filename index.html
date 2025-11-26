@@ -3,125 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gatepass & Leave System</title>
+    <title>Gate Pass System - Login/Sign Up</title>
     <style>
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #f4f4f9;
+        /* Base Styling - Modified from your original CSS */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9; /* Light grey background */
             margin: 0;
             padding: 20px;
             display: flex;
-            justify-content: center; 
+            justify-content: center;
             align-items: center;
-            height: 100vh; /* Centers the box vertically */
+            min-height: 100vh;
         }
-        .container { 
+        .container {
             background: white;
             width: 100%;
-            max-width: 400px; 
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 400px;
+            padding: 40px; /* Increased padding */
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1); /* Stronger shadow */
         }
-        h2 { text-align: center; color: #333; margin-bottom: 5px; }
-        .hidden { display: none; } 
+        h2 {
+            text-align: center;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        p.subtitle {
+            text-align: center;
+            color: #6c757d; /* Muted grey */
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 15px;
+        }
+
+        /* --- Tab System Styling (Matching the Screenshot) --- */
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .tab-button {
+            flex-grow: 1;
+            padding: 12px 0;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            color: #6c757d;
+            border: none;
+            background: none;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .tab-button.active {
+            color: #6f42c1; /* Purple color from screenshot */
+            border-bottom-color: #6f42c1;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
         
-        /* Input & Select Styling */
-        input, select { 
-            width: 100%; 
-            padding: 12px; 
-            margin: 8px 0; 
-            box-sizing: border-box; 
-            border: 1px solid #ccc;
+        /* --- Form Element Styling --- */
+        input[type="email"], input[type="password"], input[type="text"], select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0; /* Adjusted margin for better spacing */
+            box-sizing: border-box;
+            border: 1px solid #ced4da;
             border-radius: 5px;
-            font-size: 14px;
+            font-size: 15px;
+            background-color: #f8f9fa; /* Very light background for inputs */
         }
-        
-        /* Button Styling */
-        button { 
-            width: 100%; 
-            background-color: #4CAF50; 
-            color: white; 
-            padding: 14px 20px; 
-            margin: 10px 0 5px 0; 
-            border: none; 
-            border-radius: 5px; 
-            cursor: pointer; 
+
+        /* --- Button Styling (Matching the Screenshot) --- */
+        .btn-primary {
+            width: 100%;
+            background-color: #007bff; /* Blue for Login */
+            color: white;
+            padding: 14px 20px;
+            margin: 20px 0 10px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             font-size: 16px;
             font-weight: bold;
+            transition: background-color 0.3s;
         }
-        button:hover { background-color: #45a049; }
-        button.secondary { background-color: #f44336; margin-top: 10px; } /* Red button */
-        button.outline { background-color: #008CBA; } /* Blue button */
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
 
-        label {
-            font-size: 14px;
-            color: #555;
-            font-weight: 600;
-            margin-top: 10px;
-            display: block;
+        .btn-success {
+            width: 100%;
+            background-color: #28a745; /* Green for Sign Up */
+            color: white;
+            padding: 14px 20px;
+            margin: 20px 0 10px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .btn-success:hover {
+            background-color: #1e7e34;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    
-    <div id="login-section">
-        <h2>College Portal Login</h2>
-        <p style="text-align:center; color:gray; margin-top: 0;">Sign in to continue</p>
-        
-        <label>I am a:</label>
-        <select id="roleSelect">
-            <option value="student">Student</option>
-            <option value="staff">Staff / Faculty</option>
-        </select>
+    <h2>Gate Pass System</h2>
+    <p class="subtitle">Sign in or create an account</p>
 
-        <label>Email:</label>
-        <input type="email" id="email" placeholder="e.g., student@college.edu">
-        
-        <label>Password:</label>
-        <input type="password" id="password" placeholder="Enter Password">
-        
-        <button id="btnLogin">Log In</button>
-        <button id="btnSignup" class="outline">Create Account</button>
+    <div class="tabs">
+        <button class="tab-button active" data-tab="login">Login</button>
+        <button class="tab-button" data-tab="signup">Sign Up</button>
     </div>
 
-    <div id="student-dashboard" class="hidden">
-        <h2>Student Dashboard</h2>
-        <p id="welcome-msg" style="text-align:center; color: #4CAF50;"></p>
-        
-        <label>Application Type:</label>
-        <select id="app-type">
-            <option value="Leave">Leave Application</option>
-            <option value="Gatepass">Gatepass</option>
-        </select>
-
-        <input type="text" id="dept" placeholder="Department (Computer/AIDS/ETC)">
-        <input type="text" id="rollno" placeholder="Roll No">
-        <input type="text" id="reason" placeholder="Reason for Leave/Pass">
-        
-        <label>From Date/Time:</label>
-        <input type="datetime-local" id="datetime">
-
-        <button id="btnSubmit">Submit Request</button>
-        <div id="status-display" style="margin-top:10px;"></div>
-        
-        <button id="btnLogoutStudent" class="secondary">Logout</button>
+    <div id="login" class="tab-content active">
+        <form>
+            <input type="email" placeholder="anjalikadam82@gmail.com" required>
+            <input type="password" placeholder="••••••••••" required>
+            <button type="submit" class="btn-primary">Login</button>
+        </form>
     </div>
 
-    <div id="staff-dashboard" class="hidden">
-        <h2>Staff Dashboard</h2>
-        <p style="text-align:center; color:#555;">Pending Student Requests</p>
-        <div id="request-list">
-            <p style="text-align:center; color: #999;">Loading data...</p>
-        </div>
-        <button id="btnLogoutStaff" class="secondary">Logout</button>
+    <div id="signup" class="tab-content">
+        <form>
+            <input type="email" placeholder="Email Address" required>
+            <input type="password" placeholder="Create Password" required>
+            
+            <select required>
+                <option value="" disabled selected>Select Role (Student/Staff)</option>
+                <option value="student">Student</option>
+                <option value="staff">Staff / Faculty</option>
+            </select>
+            
+            <select required>
+                <option value="" disabled selected>Select Department</option>
+                <option value="computer">Computer Engineering</option>
+                <option value="it">Information Technology</option>
+                <option value="etc">E&TC</option>
+                <option value="aids">AIDS</option>
+            </select>
+            
+            <input type="text" placeholder="Full Name" required>
+            <input type="text" placeholder="Student ID (PRN)" required>
+            
+            <button type="submit" class="btn-success">Create Account</button>
+        </form>
     </div>
-
 </div>
 
-<script type="module" src="app.js"></script>
+<script>
+    // --- Basic JavaScript for Tab Switching ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const tabs = document.querySelectorAll('.tab-button');
+        const contents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetTab = tab.getAttribute('data-tab');
+
+                // Remove active class from all tabs and contents
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+
+                // Add active class to the clicked tab and its content
+                tab.classList.add('active');
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
